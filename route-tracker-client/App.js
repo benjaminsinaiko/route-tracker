@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Provider as AuthProvider } from './src/context/AuthContext';
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -17,7 +18,7 @@ const TrackStack = createStackNavigator();
 
 function LoginNav() {
   return (
-    <LoginStack.Navigator>
+    <LoginStack.Navigator headerMode='none'>
       <LoginStack.Screen name='Signup' component={SignupScreen} />
       <LoginStack.Screen name='Signin' component={SigninScreen} />
     </LoginStack.Navigator>
@@ -44,7 +45,7 @@ function TrackListNav() {
 }
 
 const App = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   return (
     <NavigationContainer>
@@ -59,4 +60,10 @@ const App = () => {
   );
 };
 
-export default App;
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
