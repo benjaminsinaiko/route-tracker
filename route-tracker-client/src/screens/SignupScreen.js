@@ -40,6 +40,10 @@ const SignupScreen = ({ navigation }) => {
         <Button mode='contained' onPress={() => signup({ email, password })}>
           Sign Up
         </Button>
+        <Spacer />
+        <Button uppercase={false} onPress={() => navigation.navigate('Signin')}>
+          <Text>Already have an account?</Text> Sign In
+        </Button>
       </Spacer>
     </View>
   );

@@ -8,7 +8,7 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: action.payload };
     }
     case 'signup': {
-      return { token: action.payload, errorMessage: '' };
+      return { userToken: action.payload, errorMessage: '' };
     }
 
     default:
@@ -19,8 +19,8 @@ const authReducer = (state, action) => {
 const signup = dispatch => async ({ email, password }) => {
   try {
     const response = await trackerApi.post('/signup', { email, password });
-    await AsyncStorage.setItem('token', response.data.token);
-    dispatch({ type: 'signup', payload: response.data.token });
+    await AsyncStorage.setItem('userToken', response.data.userToken);
+    dispatch({ type: 'signup', payload: response.data.userToken });
   } catch (err) {
     dispatch({ type: 'add_error', payload: 'Something went wrong with sign up' });
   }
@@ -43,5 +43,5 @@ const signout = dispatch => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { signup, signin, signout },
-  { token: null, errorMessage: '' }
+  { userToken: null, errorMessage: '' }
 );

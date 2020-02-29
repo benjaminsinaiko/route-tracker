@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -45,12 +45,12 @@ function TrackListNav() {
 }
 
 const App = () => {
-  const isLoggedIn = false;
+  const { state } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
       <AuthStack.Navigator headerMode='none'>
-        {isLoggedIn ? (
+        {state.userToken ? (
           <AuthStack.Screen name='Main' component={MainNav} />
         ) : (
           <AuthStack.Screen name='Login' component={LoginNav} />
