@@ -4,11 +4,11 @@ import trackerApi from '../api/tracker';
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case 'signup': {
-      return { userToken: action.payload, errorMessage: '' };
-    }
     case 'signin': {
-      return { userToken: action.payload, errorMessage: '' };
+      return { isLoading: false, userToken: action.payload, errorMessage: '' };
+    }
+    case 'load_no_token': {
+      return { ...state, isLoading: false };
     }
     case 'add_error': {
       return { ...state, errorMessage: action.payload };
@@ -21,11 +21,21 @@ const authReducer = (state, action) => {
   }
 };
 
+const tryLocalSignin = dispatch => async () => {
+  const userToken = await AsyncStorage.getItem('userToken');
+
+  if (userToken) {
+    dispatch({ type: 'signin', payload: userToken });
+  } else {
+    dispatch({ type: 'load_no_token' });
+  }
+};
+
 const signup = dispatch => async ({ email, password }) => {
   try {
     const response = await trackerApi.post('/signup', { email, password });
     await AsyncStorage.setItem('userToken', response.data.userToken);
-    dispatch({ type: 'signup', payload: response.data.userToken });
+    dispatch({ type: 'signin', payload: response.data.userToken });
   } catch (err) {
     dispatch({ type: 'add_error', payload: 'Invalid Email or Password' });
   }
@@ -53,6 +63,6 @@ const clearErrorMessage = dispatch => () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signup, signin, signout, clearErrorMessage },
-  { userToken: null, errorMessage: '' }
+  { tryLocalSignin, signup, signin, signout, clearErrorMessage },
+  { isLoading: true, userToken: null, errorMessage: '' }
 );

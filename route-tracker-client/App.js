@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -44,8 +44,20 @@ function TrackListNav() {
   );
 }
 
+const LoadingScreen = () => {
+  return null;
+};
+
 const App = () => {
-  const { state } = useContext(AuthContext);
+  const { state, tryLocalSignin } = useContext(AuthContext);
+
+  useEffect(() => {
+    tryLocalSignin();
+  }, []);
+
+  if (state.isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <NavigationContainer>
