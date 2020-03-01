@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, SafeAreaView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 
@@ -9,12 +9,12 @@ const AccountScreen = () => {
   const { signout } = useContext(AuthContext);
 
   return (
-    <>
+    <SafeAreaView>
       <Text style={{ fontSize: 48 }}>Account Screen</Text>
       <Spacer>
         <Button onPress={signout}>Sign Out</Button>
       </Spacer>
-    </>
+    </SafeAreaView>
   );
 };
 
