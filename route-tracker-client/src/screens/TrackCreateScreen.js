@@ -1,8 +1,8 @@
 // import '../helpers/_mockLocation';
-import React, { useState, useEffect, useContext } from 'react';
-import { SafeAreaView, View, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { Headline, Caption } from 'react-native-paper';
+import { Caption } from 'react-native-paper';
 
 import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
@@ -17,20 +17,19 @@ const TrackCreateScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Headline>TrackCreateScreen</Headline>
+    <View style={styles.container}>
       <Map />
       <View style={styles.form}>
         {permissionError ? <Caption>{permissionError}</Caption> : <TrackForm />}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   form: {
     position: 'absolute',
-    top: 95,
+    top: 50,
     left: 40,
     right: 40,
     margin: 'auto'
