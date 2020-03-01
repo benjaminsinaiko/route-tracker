@@ -1,11 +1,20 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
+import Spacer from '../components/Spacer';
+
+import { Context as AuthContext } from '../context/AuthContext';
 
 const AccountScreen = () => {
+  const { signout } = useContext(AuthContext);
+
   return (
-    <View>
-      <Text>AccountScreen</Text>
-    </View>
+    <>
+      <Text style={{ fontSize: 48 }}>Account Screen</Text>
+      <Spacer>
+        <Button onPress={signout}>Sign Out</Button>
+      </Spacer>
+    </>
   );
 };
 

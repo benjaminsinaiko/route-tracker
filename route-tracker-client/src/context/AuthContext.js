@@ -7,6 +7,9 @@ const authReducer = (state, action) => {
     case 'signin': {
       return { isLoading: false, userToken: action.payload, errorMessage: '' };
     }
+    case 'signout': {
+      return { ...state, userToken: null };
+    }
     case 'load_no_token': {
       return { ...state, isLoading: false };
     }
@@ -51,10 +54,9 @@ const signin = dispatch => async ({ email, password }) => {
   }
 };
 
-const signout = dispatch => {
-  return () => {
-    // somehow sign out
-  };
+const signout = dispatch => async () => {
+  await AsyncStorage.removeItem('userToken');
+  dispatch({ type: 'signout' });
 };
 
 const clearErrorMessage = dispatch => () => {
