@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -61,6 +62,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
+      <StatusBar barStyle={'dark-content'} />
       <AuthStack.Navigator headerMode='none'>
         {state.userToken ? (
           <AuthStack.Screen name='Main' component={MainNav} />

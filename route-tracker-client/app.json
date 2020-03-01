@@ -18,7 +18,12 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Route Tracker uses your location to map routes taken.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Route Tracker uses your location to map routes taken.",
+        "NSLocationAlwaysUsageDescription": "Route Tracker uses your location to map routes taken."
+      }
     }
   }
 }
