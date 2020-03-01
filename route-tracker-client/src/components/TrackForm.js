@@ -8,6 +8,7 @@ const TrackForm = () => {
   const { state, startRecording, stopRecording, changeName } = useContext(LocationContext);
 
   console.log(state.locations.length);
+  console.log(state.currentLocation);
 
   return (
     <>

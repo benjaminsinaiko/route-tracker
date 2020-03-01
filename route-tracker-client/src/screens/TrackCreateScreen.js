@@ -1,4 +1,4 @@
-import '../helpers/_mockLocation';
+// import '../helpers/_mockLocation';
 import React, { useContext, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
