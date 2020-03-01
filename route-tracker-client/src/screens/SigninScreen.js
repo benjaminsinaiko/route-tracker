@@ -10,8 +10,10 @@ const SigninScreen = ({ navigation }) => {
   const { state, signin, clearErrorMessage } = useContext(AuthContext);
 
   useEffect(() => {
-    clearErrorMessage();
-  }, [navigation]);
+    const clearError = navigation.addListener('blur', clearErrorMessage);
+
+    return clearError;
+  }, [navigation, state.errorMessage]);
 
   return (
     <View style={styles.container}>
@@ -20,6 +22,7 @@ const SigninScreen = ({ navigation }) => {
         errorMessage={state.errorMessage}
         onSubmit={signin}
         buttonText='Sign In'
+        clearErrorMessage={clearErrorMessage}
       />
       <Spacer />
       <Button uppercase={false} onPress={() => navigation.navigate('Signup')}>

@@ -27,7 +27,7 @@ const signup = dispatch => async ({ email, password }) => {
     await AsyncStorage.setItem('userToken', response.data.userToken);
     dispatch({ type: 'signup', payload: response.data.userToken });
   } catch (err) {
-    dispatch({ type: 'add_error', payload: 'Something went wrong with sign up' });
+    dispatch({ type: 'add_error', payload: 'Invalid Email or Password' });
   }
 };
 
@@ -37,7 +37,7 @@ const signin = dispatch => async ({ email, password }) => {
     await AsyncStorage.setItem('userToken', response.data.userToken);
     dispatch({ type: 'signin', payload: response.data.userToken });
   } catch (err) {
-    dispatch({ type: 'add_error', payload: 'Something went wrong with sign in' });
+    dispatch({ type: 'add_error', payload: 'Invalid Email or Password' });
   }
 };
 

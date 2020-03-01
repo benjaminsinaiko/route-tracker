@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Headline, Text, TextInput, Button } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 
-const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
+const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText, clearErrorMessage }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    if (errorMessage) {
+      clearErrorMessage();
+    }
+  }, [email, password]);
 
   return (
     <>
@@ -16,6 +22,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
         </Headline>
       </Spacer>
       <TextInput
+        error={errorMessage}
         label='Email'
         value={email}
         onChangeText={setEmail}
@@ -26,6 +33,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, buttonText }) => {
       />
       <Spacer />
       <TextInput
+        error={errorMessage}
         label='Password'
         value={password}
         onChangeText={setPassword}
@@ -49,7 +57,6 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red',
-    fontSize: 16,
     marginLeft: 15,
     marginTop: 15
   }
