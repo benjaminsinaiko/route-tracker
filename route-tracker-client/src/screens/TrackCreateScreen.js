@@ -1,56 +1,40 @@
 // import '../helpers/_mockLocation';
 import React, { useState, useEffect, useContext } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
+import { SafeAreaView, View, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { Headline, Caption } from 'react-native-paper';
 
 import { Context as LocationContext } from '../context/LocationContext';
+import useLocation from '../hooks/useLocation';
 import Map from '../components/Map';
+import TrackForm from '../components/TrackForm';
 
 const TrackCreateScreen = () => {
-  const { addLocation } = useContext(LocationContext);
-  const [permissionError, setPermissionError] = useState(null);
-
-  const startWatching = async () => {
-    try {
-      const { status } = await Permissions.askAsync(Permissions.LOCATION);
-
-      if (status !== 'granted') {
-        setPermissionError('Permission to access location was denied');
-      }
-
-      await Location.watchPositionAsync(
-        {
-          accuracy: Location.Accuracy.BestForNavigation,
-          timeInterval: 1000,
-          distanceInterval: 10
-        },
-        location => {
-          console.log(location);
-          addLocation(location);
-        }
-      );
-    } catch (err) {
-      setPermissionError(err);
-    }
-  };
-
-  useEffect(() => {
-    startWatching();
-  }, []);
+  const isFocused = useIsFocused();
+  const { state, addLocation } = useContext(LocationContext);
+  const [permissionError] = useLocation(isFocused, location =>
+    addLocation(location, state.recording)
+  );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Headline>TrackCreateScreen</Headline>
       <Map />
-      {!!permissionError && <Caption>{permissionError}</Caption>}
+      <View style={styles.form}>
+        {permissionError ? <Caption>{permissionError}</Caption> : <TrackForm />}
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  // style
+  form: {
+    position: 'absolute',
+    top: 95,
+    left: 40,
+    right: 40,
+    margin: 'auto'
+  }
 });
 
 export default TrackCreateScreen;
