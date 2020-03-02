@@ -4,7 +4,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { List } from 'react-native-paper';
 
 import { TrackContext } from '../context/TrackContext';
-import dateFormat from '../helpers/dateFormat';
+import { dateFormat } from '../helpers/dateTime';
 
 const TrackListScreen = ({ navigation }) => {
   const isFocused = useIsFocused();
@@ -18,13 +18,13 @@ const TrackListScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>TrackListScreen</Text>
-      <Button title='Go to Track Detail' onPress={() => navigation.navigate('Track Detail')} />
       <List.Section>
         {tracks.map(track => (
           <TouchableOpacity
             key={track._id}
-            onPress={() => navigation.navigate('Track Detail', { _id: track._id })}
+            onPress={() =>
+              navigation.navigate('Track Detail', { _id: track._id, name: track.name })
+            }
           >
             <List.Item title={track.name} description={dateFormat(track.locations[0].timestamp)} />
           </TouchableOpacity>

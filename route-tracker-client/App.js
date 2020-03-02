@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { LocationProvider } from './src/context/LocationContext';
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
@@ -31,9 +32,36 @@ function LoginNav() {
 function MainNav() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name='Tracks' component={TrackListNav} />
-      <Tab.Screen name='Track Create' component={TrackCreateScreen} />
-      <Tab.Screen name='Account' component={AccountScreen} />
+      <Tab.Screen
+        name='Tracks'
+        component={TrackListNav}
+        options={{
+          tabBarLabel: 'Routes List',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name='routes' color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name='Track Create'
+        component={TrackCreateScreen}
+        options={{
+          tabBarLabel: 'Create Route',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name='map-plus' color={color} size={size} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name='Account'
+        component={AccountScreen}
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name='account' color={color} size={size} />
+          )
+        }}
+      />
     </Tab.Navigator>
   );
 }
