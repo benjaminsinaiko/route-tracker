@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, StatusBar, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 

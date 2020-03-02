@@ -15,9 +15,7 @@ const TrackDetailScreen = ({ route, navigation }) => {
   }, []);
 
   const track = state.find(t => t._id === _id);
-  // console.log(track);
   const initialCoords = track.locations[0].coords;
-  // console.log(initialCoords);
 
   const routeTime = () => {
     const firstTrack = track.locations[0].timestamp;

@@ -7,7 +7,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { LocationProvider } from './src/context/LocationContext';
 import { AuthProvider, AuthContext } from './src/context/AuthContext';
-import { TrackProvider, TrackContext } from './src/context/TrackContext';
+import { TrackProvider } from './src/context/TrackContext';
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -36,7 +36,7 @@ function MainNav() {
         name='Tracks'
         component={TrackListNav}
         options={{
-          tabBarLabel: 'Routes List',
+          tabBarLabel: 'Routes',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name='routes' color={color} size={size} />
           )
@@ -69,7 +69,7 @@ function MainNav() {
 function TrackListNav() {
   return (
     <TrackStack.Navigator>
-      <TrackStack.Screen name='Track List' component={TrackListScreen} />
+      <TrackStack.Screen name='Routes List' component={TrackListScreen} />
       <TrackStack.Screen name='Track Detail' component={TrackDetailScreen} />
     </TrackStack.Navigator>
   );

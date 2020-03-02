@@ -14,8 +14,8 @@ export const dateFormat = timestamp => {
 export const routeDuration = (timestampFirst, timestampLast) => {
   const difference = timestampLast - timestampFirst;
   const hrsDiff = Math.floor(difference / 1000 / 60 / 60);
-  const minsDiff = Math.floor(difference / 1000 / 60);
-  const secsDiff = Math.floor(difference / 1000);
+  const minsDiff = Math.floor((difference / 1000 / 60) % 60);
+  const secsDiff = Math.floor((difference / 1000) % 60);
 
   return [hrsDiff, minsDiff, secsDiff];
 };

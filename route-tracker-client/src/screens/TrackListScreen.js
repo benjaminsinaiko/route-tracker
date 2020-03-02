@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { List } from 'react-native-paper';
 
@@ -17,7 +17,7 @@ const TrackListScreen = ({ navigation }) => {
   }, [isFocused]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <List.Section>
         {tracks.map(track => (
           <TouchableOpacity
@@ -35,7 +35,9 @@ const TrackListScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  // style
+  container: {
+    flex: 1
+  }
 });
 
 export default TrackListScreen;
