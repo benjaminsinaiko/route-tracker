@@ -4,8 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Provider as LocationProvider } from './src/context/LocationContext';
-import { Provider as AuthProvider, Context as AuthContext } from './src/context/AuthContext';
+import { LocationProvider } from './src/context/LocationContext';
+import { AuthProvider, AuthContext } from './src/context/AuthContext';
+import { TrackProvider, TrackContext } from './src/context/TrackContext';
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
@@ -77,10 +78,12 @@ const App = () => {
 
 export default () => {
   return (
-    <LocationProvider>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </LocationProvider>
+    <AuthProvider>
+      <LocationProvider>
+        <TrackProvider>
+          <App />
+        </TrackProvider>
+      </LocationProvider>
+    </AuthProvider>
   );
 };

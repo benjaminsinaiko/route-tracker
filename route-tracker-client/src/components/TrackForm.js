@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { LocationContext } from '../context/LocationContext';
+import useSaveTrack from '../hooks/useSaveTrack';
 
 const TrackForm = () => {
   const { state, startRecording, stopRecording, changeName } = useContext(LocationContext);
   const { name, locations, recording } = state;
+  const [saveTrack] = useSaveTrack();
 
   return (
     <>
@@ -31,8 +32,15 @@ const TrackForm = () => {
         </Button>
       )}
       {!recording && locations.length ? (
-        <Button icon='routes' mode='contained' style={styles.save} uppercase={false}>
-          Save Route
+        <Button
+          disabled={locations.length && !name}
+          icon='map-plus'
+          mode='contained'
+          style={styles.save}
+          uppercase={false}
+          onPress={saveTrack}
+        >
+          {locations.length && !name ? 'No Route Name' : 'Save Route'}
         </Button>
       ) : null}
     </>
@@ -64,7 +72,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: 160
+    width: 170
   }
 });
 
