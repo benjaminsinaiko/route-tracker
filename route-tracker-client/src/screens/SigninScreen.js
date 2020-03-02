@@ -3,7 +3,7 @@ import { View, StatusBar, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 
-import { Context as AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import AuthForm from '../components/AuthForm';
 
 const SigninScreen = ({ navigation }) => {

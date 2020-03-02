@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Caption } from 'react-native-paper';
 
-import { Context as LocationContext } from '../context/LocationContext';
+import { LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 import Map from '../components/Map';
 import TrackForm from '../components/TrackForm';

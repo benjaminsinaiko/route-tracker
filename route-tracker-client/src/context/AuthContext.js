@@ -63,7 +63,7 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: 'clear_error_message' });
 };
 
-export const { Provider, Context } = createDataContext(
+export const { Provider: AuthProvider, Context: AuthContext } = createDataContext(
   authReducer,
   { tryLocalSignin, signup, signin, signout, clearErrorMessage },
   { isLoading: true, userToken: null, errorMessage: '' }

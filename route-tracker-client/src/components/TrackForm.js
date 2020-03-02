@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 // import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { Context as LocationContext } from '../context/LocationContext';
+import { LocationContext } from '../context/LocationContext';
 
 const TrackForm = () => {
   const { state, startRecording, stopRecording, changeName } = useContext(LocationContext);

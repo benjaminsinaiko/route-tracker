@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Polyline, Circle } from 'react-native-maps';
 
-import { Context as LocationContext } from '../context/LocationContext';
+import { LocationContext } from '../context/LocationContext';
 
 const Map = () => {
   const {

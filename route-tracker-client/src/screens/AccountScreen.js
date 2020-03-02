@@ -3,7 +3,7 @@ import { Text, SafeAreaView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import Spacer from '../components/Spacer';
 
-import { Context as AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const AccountScreen = () => {
   const { signout } = useContext(AuthContext);
