@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Context as LocationContext } from '../context/LocationContext';
 
 const TrackForm = () => {
   const { state, startRecording, stopRecording, changeName } = useContext(LocationContext);
-
-  console.log(state.locations.length);
-  console.log(state.currentLocation);
+  const { name, locations, recording } = state;
 
   return (
     <>
@@ -17,20 +16,25 @@ const TrackForm = () => {
           style={styles.input}
           autoCapitalize='words'
           placeholder='Enter Route Name'
-          value={state.name}
+          value={name}
           onChangeText={changeName}
           returnKeyType='done'
         />
       </View>
-      {state.recording ? (
+      {recording ? (
         <Button mode='contained' compact onPress={stopRecording} color='red'>
           Stop
         </Button>
       ) : (
-        <Button mode='contained' compact onPress={startRecording}>
+        <Button mode='outlined' compact contentStyle={styles.record} onPress={startRecording}>
           Start Recording
         </Button>
       )}
+      {!recording && locations.length ? (
+        <Button icon='routes' mode='contained' style={styles.save} uppercase={false}>
+          Save Route
+        </Button>
+      ) : null}
     </>
   );
 };
@@ -49,6 +53,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 5
+  },
+  record: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderWidth: 1,
+    borderColor: '#6200ee'
+  },
+  save: {
+    backgroundColor: '#03dac4',
+    marginTop: 15,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 160
   }
 });
 
